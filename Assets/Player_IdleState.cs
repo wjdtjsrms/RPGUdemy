@@ -12,7 +12,7 @@ namespace SSunSoft.RPGUdemy
         {
             base.Update();
 
-            if (Input.GetKeyDown(KeyCode.F))
+            if (player.moveInput.x != 0 || player.moveInput.y != 0)
                 stateMachine.ChangeState(player.moveState);
         }
     }
