@@ -18,5 +18,10 @@ namespace SSunSoft.RPGUdemy
             currentState = newState;
             currentState.Enter();
         }
+
+        public void UpdateActiveState()
+        {
+            currentState.Update();
+        }
     }
 }

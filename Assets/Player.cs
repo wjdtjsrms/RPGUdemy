@@ -7,6 +7,7 @@ namespace SSunSoft.RPGUdemy
         private PlayerInputSet input;
         private StateMachine stateMachine;
 
+        public Animator anim { get; private set; }
         public Player_IdleState idleState { get; private set; }
         public Player_MoveState moveState { get; private set; }
 
@@ -14,11 +15,13 @@ namespace SSunSoft.RPGUdemy
 
         private void Awake()
         {
+            anim = GetComponentInChildren<Animator>();
+
             stateMachine = new StateMachine();
             input = new PlayerInputSet();
 
-            idleState = new Player_IdleState(this, stateMachine, "idle");
-            moveState = new Player_MoveState(this, stateMachine, "move");
+            idleState = new Player_IdleState(this, stateMachine, "Idle");
+            moveState = new Player_MoveState(this, stateMachine, "Move");
         }
 
         private void OnEnable()
@@ -40,7 +43,7 @@ namespace SSunSoft.RPGUdemy
 
         private void Update()
         {
-            stateMachine.currentState.Update();
+            stateMachine.UpdateActiveState();
         }
     }
 }
