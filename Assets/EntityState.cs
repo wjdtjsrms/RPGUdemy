@@ -10,6 +10,7 @@ namespace SSunSoft.RPGUdemy
         protected readonly string animBoolName;
 
         protected Animator anim;
+        protected Rigidbody2D rb;
 
         public EntityState(Player player, StateMachine stateMachine, string animBoolName)
         {
@@ -18,6 +19,7 @@ namespace SSunSoft.RPGUdemy
             this.animBoolName = animBoolName;
 
             anim = player.anim;
+            rb= player.rb;
         }
 
         public virtual void Enter()

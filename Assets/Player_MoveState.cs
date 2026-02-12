@@ -14,6 +14,8 @@ namespace SSunSoft.RPGUdemy
 
             if (player.moveInput.x == 0 && player.moveInput.y == 0)
                 stateMachine.ChangeState(player.idleState);
+
+            player.SetVelocity(player.moveInput.x * player.moveSpeed, rb.linearVelocity.y);
         }
     }
 }
