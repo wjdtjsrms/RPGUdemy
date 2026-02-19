@@ -11,6 +11,7 @@ namespace SSunSoft.RPGUdemy
 
         protected Animator anim;
         protected Rigidbody2D rb;
+        protected PlayerInputSet input;
 
         public EntityState(Player player, StateMachine stateMachine, string animBoolName)
         {
@@ -19,7 +20,8 @@ namespace SSunSoft.RPGUdemy
             this.animBoolName = animBoolName;
 
             anim = player.anim;
-            rb= player.rb;
+            rb = player.rb;
+            input = player.input;
         }
 
         public virtual void Enter()
@@ -29,7 +31,7 @@ namespace SSunSoft.RPGUdemy
 
         public virtual void Update()
         {
-            Debug.Log($"I run update of {animBoolName}");
+            anim.SetFloat("yVelocity", rb.linearVelocity.y);
         }
 
         public virtual void Exit()
