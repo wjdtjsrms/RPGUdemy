@@ -13,6 +13,9 @@ namespace SSunSoft.RPGUdemy
             base.Update();
             HandleWallSlide();
 
+            if (input.Player.Jump.WasPressedThisFrame())
+                stateMachine.ChangeState(player.wallJumpState);
+
             if (player.wallDetected == false)
                 stateMachine.ChangeState(player.fallState);
 
