@@ -17,6 +17,11 @@ namespace SSunSoft.RPGUdemy
         public Player_WallSlideState wallSlideState { get; private set; }
         public Player_WallJumpState wallJumpState { get; private set; }
         public Player_DashState dashState { get; private set; }
+        public Player_BasicAttackState basicAttackState { get; private set; }
+
+        [Header("Attack Details")]
+        public Vector2 attackVelocity = Vector2.zero;
+        public float attackVelocityDuration = .1f;
 
         [Header("Movement Details")]
         public float moveSpeed;
@@ -58,6 +63,7 @@ namespace SSunSoft.RPGUdemy
             wallSlideState = new Player_WallSlideState(this, stateMachine, "wallSlide");
             wallJumpState = new Player_WallJumpState(this, stateMachine, "jumpFall");
             dashState = new Player_DashState(this, stateMachine, "dash");
+            basicAttackState = new Player_BasicAttackState(this, stateMachine, "basicAttack");
         }
 
         private void OnEnable()
@@ -81,6 +87,11 @@ namespace SSunSoft.RPGUdemy
         {
             HandleCollisionDetection();
             stateMachine.UpdateActiveState();
+        }
+
+        public void CallAnimationTrigger()
+        {
+            stateMachine.currentState.CallAnimationTrigger();
         }
 
         public void SetVelocity(float xVelocity, float yVelocity)
