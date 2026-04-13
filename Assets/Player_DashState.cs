@@ -16,7 +16,7 @@ namespace SSunSoft.RPGUdemy
             base.Enter();
 
             stateTimer = player.dashDuration;
-            dashDir = player.facingDir;
+            dashDir = player.moveInput.x != 0 ? (int)player.moveInput.x : player.facingDir; ;
 
             originalGravityScale = rb.gravityScale;
             rb.gravityScale = 0f;

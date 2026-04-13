@@ -1,6 +1,8 @@
 namespace SSunSoft.RPGUdemy
 {
+    using System.Collections;
     using UnityEngine;
+
 
     public class Player : MonoBehaviour
     {
@@ -20,8 +22,10 @@ namespace SSunSoft.RPGUdemy
         public Player_BasicAttackState basicAttackState { get; private set; }
 
         [Header("Attack Details")]
-        public Vector2 attackVelocity = Vector2.zero;
+        public Vector2[] attackVelocity;
         public float attackVelocityDuration = .1f;
+        public float comboResetTime = 1f;
+        private Coroutine queuedAttackCo;
 
         [Header("Movement Details")]
         public float moveSpeed;
@@ -87,6 +91,20 @@ namespace SSunSoft.RPGUdemy
         {
             HandleCollisionDetection();
             stateMachine.UpdateActiveState();
+        }
+
+        public void EnterAttackStateWithDelay()
+        {
+            if (queuedAttackCo != null)
+                StopCoroutine(queuedAttackCo);
+
+            queuedAttackCo = StartCoroutine(EnterAttackStateWithDelayCo());
+        }
+
+        private IEnumerator EnterAttackStateWithDelayCo()
+        {
+            yield return new WaitForEndOfFrame();
+            stateMachine.ChangeState(basicAttackState);
         }
 
         public void CallAnimationTrigger()
