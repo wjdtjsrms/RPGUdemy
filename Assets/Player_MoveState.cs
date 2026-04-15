@@ -12,7 +12,7 @@ namespace SSunSoft.RPGUdemy
         {
             base.Update();
 
-            if (player.moveInput.x == 0 && player.moveInput.y == 0)
+            if (player.moveInput.x == 0 || player.wallDetected)
                 stateMachine.ChangeState(player.idleState);
 
             player.SetVelocity(player.moveInput.x * player.moveSpeed, rb.linearVelocity.y);

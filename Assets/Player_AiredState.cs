@@ -14,6 +14,9 @@ namespace SSunSoft.RPGUdemy
 
             if (player.moveInput.x != 0)
                 player.SetVelocity(player.moveInput.x * (player.moveSpeed * player.intAirMoveMultiplier), rb.linearVelocity.y);
+
+            if (input.Player.Attack.WasPressedThisFrame())
+                stateMachine.ChangeState(player.jumpAttackState);
         }
     }
 }
