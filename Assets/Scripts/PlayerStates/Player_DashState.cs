@@ -2,7 +2,7 @@ namespace SSunSoft.RPGUdemy
 {
     using UnityEngine;
 
-    public class Player_DashState : EntityState
+    public class Player_DashState : PlayerState
     {
         private float originalGravityScale = 0f;
         private int dashDir;
