@@ -14,7 +14,7 @@ namespace SSunSoft.RPGUdemy
         {
             mainCamera = Camera.main;
             cameraHalfWidth = mainCamera.orthographicSize * mainCamera.aspect;
-            CalculateImageLength();
+            InitializeLayers();
         }
 
         private void FixedUpdate()
@@ -33,7 +33,7 @@ namespace SSunSoft.RPGUdemy
             }
         }
 
-        private void CalculateImageLength()
+        private void InitializeLayers()
         {
             foreach (var layer in backgroundLayers)
                 layer.CalculateImageWidth();
