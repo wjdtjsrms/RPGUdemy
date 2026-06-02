@@ -1,4 +1,5 @@
 {
+    "dotnet.preferCSharpExtension": true,
     "files.exclude": {
         "**/.DS_Store": true,
         "**/.git": true,
@@ -54,18 +55,33 @@
         "ProjectSettings/": true,
         "UserSettings/": true,
         "temp/": true,
-        "Temp/": true
+        "Temp/": true,
+        "**/*.log": true,
+        "**/*.unitypackage": true,
+        "**/*.txt": true,
+        "**/*.asmdef": true,
+        "**/*.tmp": true,
+        "node_modules": true,
+        "dist": true,
+        "*.meta": true,
+        "secret_file.txt": true,
+        "Build": true,
+        "Library": true,
+        "*.gitignore": true,
+        "*.vsconfig": true,
+        "*.user": true,
+        "*.editorconfig": true,
+        "ProjectSettings": true,
+        "Temp": true,
+        "UserSettings": true,
+        "Logs": true,
+        "obj": true,
+        "Packages": true,
+        ".vs": true,
+        ".idea": true,
+        "*.claude": true,
+        "*.md": true
     },
-    "files.associations": {
-        "*.asset": "yaml",
-        "*.meta": "yaml",
-        "*.prefab": "yaml",
-        "*.unity": "yaml",
-    },
-    "explorer.fileNesting.enabled": true,
-    "explorer.fileNesting.patterns": {
-        "*.sln": "*.csproj",
-        "*.slnx": "*.csproj"
-    },
-    "dotnet.defaultSolution": "RPGUdemy.slnx"
+    "dotnet.defaultSolution": "RPGUdemy.sln",
+    "terminal.integrated.allowChords": true
 }
