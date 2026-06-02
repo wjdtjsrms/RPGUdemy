@@ -2770,6 +2770,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1459907608}
+  - {fileID: 494701315}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &389329991
@@ -2784,13 +2785,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e1ca9aaddb64aafad37b83638cb5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheckDistance: 0
-  wallCheckDistance: 0
+  groundCheckDistance: 0.5
+  wallCheckDistance: 0.8
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  groundCheck: {fileID: 494701315}
   primaryWallCheck: {fileID: 389329990}
   secondaryWallCheck: {fileID: 389329990}
+  idleTime: 2
+  moveSpeed: 1.4
 --- !u!50 &389329992
 Rigidbody2D:
   serializedVersion: 5
@@ -3142,6 +3146,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &494701314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 494701315}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &494701315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494701314}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.652, y: -1.013, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 389329990}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3665,6 +3700,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  groundCheck: {fileID: 909667794}
   primaryWallCheck: {fileID: 450679482}
   secondaryWallCheck: {fileID: 1652460671}
   attackVelocity:
