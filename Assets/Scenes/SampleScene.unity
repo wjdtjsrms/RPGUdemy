@@ -2792,9 +2792,10 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 494701315}
   primaryWallCheck: {fileID: 389329990}
-  secondaryWallCheck: {fileID: 389329990}
+  secondaryWallCheck: {fileID: 0}
   idleTime: 2
   moveSpeed: 1.4
+  moveAnimSpeedMultiplier: 1
 --- !u!50 &389329992
 Rigidbody2D:
   serializedVersion: 5
@@ -3954,7 +3955,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1032308895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41362bf018b2b2841ad08630185266aa, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f11ea2dc7d6944eabe08770ec2697bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1248733536
@@ -4314,6 +4315,7 @@ GameObject:
   - component: {fileID: 1459907608}
   - component: {fileID: 1459907610}
   - component: {fileID: 1459907609}
+  - component: {fileID: 1459907611}
   m_Layer: 0
   m_Name: Animator
   m_TagString: Untagged
@@ -4413,6 +4415,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1459907611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459907607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f11ea2dc7d6944eabe08770ec2697bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1530135454
 GameObject:
   m_ObjectHideFlags: 0

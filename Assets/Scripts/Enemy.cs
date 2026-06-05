@@ -6,6 +6,7 @@ namespace SSunSoft.RPGUdemy
     {
         public Enemy_IdleState idleState;
         public Enemy_MoveState moveState;
+        public Enemy_AttackState attackState;
 
         [Header("Movement Details")]
         public float idleTime = 2f;

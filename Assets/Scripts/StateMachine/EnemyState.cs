@@ -18,6 +18,10 @@ namespace SSunSoft.RPGUdemy
         {
             base.Update();
 
+            // Test Code
+            if (Input.GetKeyDown(KeyCode.F))
+                stateMachine.ChangeState(enemy.attackState);
+
             anim.SetFloat("moveAnimSpeedMultiplier", enemy.moveAnimSpeedMultiplier);
         }
     }
