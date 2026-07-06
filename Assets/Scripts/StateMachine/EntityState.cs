@@ -28,6 +28,7 @@ namespace SSunSoft.RPGUdemy
         public virtual void Update()
         {
             stateTimer -= Time.deltaTime;
+            UpdateAnimationParameters();
         }
 
         public virtual void Exit()
@@ -35,9 +36,14 @@ namespace SSunSoft.RPGUdemy
             anim.SetBool(animBoolName, false);
         }
 
-        public void CallAnimationTrigger()
+        public void AnimationTrigger()
         {
             triggerCalled = true;
+        }
+
+        public virtual void UpdateAnimationParameters()
+        {
+
         }
     }
 }

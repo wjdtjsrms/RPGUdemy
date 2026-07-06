@@ -11,7 +11,7 @@ namespace SSunSoft.RPGUdemy
         {
             base.Update();
 
-            if (enemy.PlayerDetection())
+            if (enemy.PlayerDetected())
                 stateMachine.ChangeState(enemy.battleState);
 
         }

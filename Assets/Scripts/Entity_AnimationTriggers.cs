@@ -13,7 +13,7 @@ namespace SSunSoft.RPGUdemy
 
         private void CurrentStateTrigger()
         {
-            entity.CallAnimationTrigger();
+            entity.CurrentStateAnimationTrigger();
         }
     }
 
