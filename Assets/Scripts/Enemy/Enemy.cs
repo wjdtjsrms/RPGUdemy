@@ -8,6 +8,7 @@ namespace SSunSoft.RPGUdemy
         public Enemy_MoveState moveState;
         public Enemy_AttackState attackState;
         public Enemy_BattleState battleState;
+        public Enemy_DeadState deadState;
 
         [Header("Battle Details")]
         public float battleMoveSpeed = 3f;
@@ -27,6 +28,13 @@ namespace SSunSoft.RPGUdemy
         [SerializeField] private Transform playerCheck;
         [SerializeField] public float playerCheckDistance = 10f;
         public Transform player { get; private set; }
+
+        public override void EntityDeath()
+        {
+            base.EntityDeath();
+
+            stateMachine.ChangeState(deadState);
+        }
 
         public void TryEnterBattleState(Transform player)
         {
