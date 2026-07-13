@@ -36,6 +36,11 @@ namespace SSunSoft.RPGUdemy
             stateMachine.ChangeState(deadState);
         }
 
+        private void HandlePlayerDeath()
+        {
+            stateMachine.ChangeState(idleState);
+        }
+
         public void TryEnterBattleState(Transform player)
         {
             if (stateMachine.currentState == battleState || stateMachine.currentState == attackState)
@@ -75,6 +80,16 @@ namespace SSunSoft.RPGUdemy
 
             Gizmos.color = Color.green;
             Gizmos.DrawLine(playerCheck.position, new Vector3(playerCheck.position.x + (facingDir * minRetreatDistance), playerCheck.position.y));
+        }
+
+        private void OnEnable()
+        {
+            Player.OnPlayerDeath += HandlePlayerDeath;
+        }
+
+        private void OnDisable()
+        {
+            Player.OnPlayerDeath -= HandlePlayerDeath;
         }
     }
 }

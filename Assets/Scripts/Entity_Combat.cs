@@ -15,8 +15,8 @@ namespace SSunSoft.RPGUdemy
         {
             foreach (var target in GetDetectionColliders())
             {
-                var targetHealth = target.GetComponent<Entity_Health>();
-                targetHealth?.TakeDamage(damage, damageDealer: transform);
+                var damgable = target.GetComponent<IDamgable>();
+                damgable.TakeDamage(damage, damageDealer: transform);
             }
         }
 
