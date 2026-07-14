@@ -7,7 +7,7 @@ namespace SSunSoft.RPGUdemy
         private Entity entity;
         private Entity_Combat entityCombat;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             entity = GetComponentInParent<Entity>();
             entityCombat = GetComponentInParent<Entity_Combat>();

@@ -9,6 +9,7 @@ namespace SSunSoft.RPGUdemy
         public Enemy_AttackState attackState;
         public Enemy_BattleState battleState;
         public Enemy_DeadState deadState;
+        public Enemy_StunnedState stunnedState;
 
         [Header("Battle Details")]
         public float battleMoveSpeed = 3f;
@@ -16,6 +17,11 @@ namespace SSunSoft.RPGUdemy
         public float battleTimeDuration = 5f;
         public float minRetreatDistance = 1f;
         public Vector2 retreatVelocity;
+
+        [Header("Stunned Details")]
+        public float stunnedDuration = 1f;
+        public Vector2 stunnedVelocity = new Vector2(7, 7);
+        protected bool canBeStunned;
 
         [Header("Movement Details")]
         public float idleTime = 2f;
@@ -28,6 +34,8 @@ namespace SSunSoft.RPGUdemy
         [SerializeField] private Transform playerCheck;
         [SerializeField] public float playerCheckDistance = 10f;
         public Transform player { get; private set; }
+
+        public void EnableCounterWindow(bool enable) => canBeStunned = enable;
 
         public override void EntityDeath()
         {
