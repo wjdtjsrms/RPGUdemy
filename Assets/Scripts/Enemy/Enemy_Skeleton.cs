@@ -4,6 +4,7 @@ namespace SSunSoft.RPGUdemy
 
     public class Enemy_Skeleton : Enemy, ICounterable
     {
+        public bool CanBeCountered => canBeStunned;
 
         protected override void Awake()
         {
@@ -26,7 +27,7 @@ namespace SSunSoft.RPGUdemy
 
         public void HandleCounter()
         {
-            if (canBeStunned == false)
+            if (CanBeCountered == false)
                 return;
 
             stateMachine.ChangeState(stunnedState);
