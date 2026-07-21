@@ -1,9 +1,11 @@
 namespace SSunSoft.RPGUdemy
 {
     using UnityEngine;
+    using UnityEngine.UI;
 
     public class Entity_Health : MonoBehaviour, IDamgable
     {
+        private Slider healthBar;
         private Entity_VFX entityVfx;
         private Entity entity;
 

@@ -4,6 +4,7 @@ namespace SSunSoft.RPGUdemy
 
     public class Entity_Combat : MonoBehaviour
     {
+        private Entity_VFX vfx;
         public float damage = 10f;
 
         [Header("Target Detection")]
@@ -11,12 +12,22 @@ namespace SSunSoft.RPGUdemy
         [SerializeField] private float targetCheckRadius = 1f;
         [SerializeField] private LayerMask wahtIsTarget;
 
+        private void Awake()
+        {
+            vfx = GetComponent<Entity_VFX>();
+        }
+
         public void PerformAttack()
         {
             foreach (var target in GetDetectionColliders())
             {
                 var damgable = target.GetComponent<IDamgable>();
+
+                if (damgable == null)
+                    continue;
+
                 damgable.TakeDamage(damage, damageDealer: transform);
+                vfx.CreateOnHitVFX(target.transform);
             }
         }
 
