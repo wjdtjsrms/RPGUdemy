@@ -2,9 +2,12 @@ namespace SSunSoft.RPGUdemy
 {
     using System.Collections;
     using UnityEngine;
+    using System;
 
     public class Entity : MonoBehaviour
     {
+        public event Action OnFlipped;
+
         public Animator anim { get; private set; }
         public Rigidbody2D rb { get; private set; }
         protected StateMachine stateMachine;
@@ -97,6 +100,8 @@ namespace SSunSoft.RPGUdemy
             transform.Rotate(0, 180, 0);
             facingRight = !facingRight;
             facingDir *= -1;
+
+            OnFlipped?.Invoke();
         }
 
         private void HandleCollisionDetection()

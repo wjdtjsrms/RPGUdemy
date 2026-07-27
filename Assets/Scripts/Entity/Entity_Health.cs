@@ -25,8 +25,10 @@ namespace SSunSoft.RPGUdemy
         {
             entityVfx = GetComponent<Entity_VFX>();
             entity = GetComponent<Entity>();
+            healthBar = GetComponentInChildren<Slider>();
 
             currentHP = maxHP;
+            UpdateHealthBar();
         }
 
         public virtual void TakeDamage(float damage, Transform damageDealer)
@@ -44,6 +46,7 @@ namespace SSunSoft.RPGUdemy
         protected void ReduceHp(float damage)
         {
             currentHP -= damage;
+            UpdateHealthBar();
 
             if (currentHP <= 0)
                 Die();
@@ -53,6 +56,13 @@ namespace SSunSoft.RPGUdemy
         {
             isDead = true;
             entity.EntityDeath();
+        }
+
+        private void UpdateHealthBar()
+        {
+            if (healthBar == null)
+                return;
+            healthBar.value = currentHP / maxHP;
         }
 
         private Vector2 CalculateKnockback(float damage, Transform damageDealer)
