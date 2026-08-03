@@ -7,7 +7,7 @@ namespace SSunSoft.RPGUdemy
     {
         [SerializeField] private Transform background;
         [SerializeField] private float parallaxMultiplier;
-        [SerializeField] private float imageWidthOffset = 10f;
+        // [SerializeField] private float imageWidthOffset = 10f;
 
         private float imageFullWidth;
         private float ImageHalfWidth;

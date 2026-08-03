@@ -5,7 +5,7 @@ namespace SSunSoft.RPGUdemy
     public class Entity_Combat : MonoBehaviour
     {
         private Entity_VFX vfx;
-        public float damage = 10f;
+        private Entity_Stats stats;
 
         [Header("Target Detection")]
         [SerializeField] private Transform targetCheck;
@@ -15,6 +15,7 @@ namespace SSunSoft.RPGUdemy
         private void Awake()
         {
             vfx = GetComponent<Entity_VFX>();
+            stats = GetComponent<Entity_Stats>();
         }
 
         public void PerformAttack()
@@ -26,8 +27,12 @@ namespace SSunSoft.RPGUdemy
                 if (damgable == null)
                     continue;
 
-                damgable.TakeDamage(damage, damageDealer: transform);
-                vfx.CreateOnHitVFX(target.transform);
+                var targetGotHit = damgable.TakeDamage(stats.GetPhysicalDamage(), damageDealer: transform);
+
+                if (targetGotHit)
+                {
+                    vfx.CreateOnHitVFX(target.transform);
+                }
             }
         }
 

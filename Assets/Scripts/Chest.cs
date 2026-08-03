@@ -19,12 +19,14 @@ namespace SSunSoft
             fx = GetComponent<Entity_VFX>();
         }
 
-        public void TakeDamage(float damage, Transform damageDealer)
+        public bool TakeDamage(float damage, Transform damageDealer)
         {
             fx.PlayOnDamageVfx();
             animator.SetBool("chestOpen", true);
             rb.linearVelocity = knockback;
             rb.angularVelocity = Random.Range(-200f, 200f);
+
+            return true;
         }
     }
 }

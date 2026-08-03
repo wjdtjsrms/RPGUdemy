@@ -1,6 +1,7 @@
 namespace SSunSoft.RPGUdemy
 {
     using UnityEngine;
+    using UnityEngine.Rendering.Universal;
     using UnityEngine.UI;
 
     public class Entity_Health : MonoBehaviour, IDamgable
@@ -8,9 +9,9 @@ namespace SSunSoft.RPGUdemy
         private Slider healthBar;
         private Entity_VFX entityVfx;
         private Entity entity;
+        private Entity_Stats stats;
 
         [SerializeField] protected float currentHP;
-        [SerializeField] protected float maxHP = 100f;
         [SerializeField] protected bool isDead;
 
         [Header("On Damage Knockback")]
@@ -25,15 +26,23 @@ namespace SSunSoft.RPGUdemy
         {
             entityVfx = GetComponent<Entity_VFX>();
             entity = GetComponent<Entity>();
+            stats = GetComponent<Entity_Stats>();
+
             healthBar = GetComponentInChildren<Slider>();
 
-            currentHP = maxHP;
+            currentHP = stats.GetMaxHealth();
             UpdateHealthBar();
         }
 
-        public virtual void TakeDamage(float damage, Transform damageDealer)
+        public virtual bool TakeDamage(float damage, Transform damageDealer)
         {
-            if (isDead) return;
+            if (isDead) return false;
+
+            if (AttackEvaded())
+            {
+                Debug.Log($"{gameObject.name} evaded the attack!");
+                return false;
+            }
 
             var knockback = CalculateKnockback(damage, damageDealer);
             var duration = CalculateDuration(damage);
@@ -41,7 +50,11 @@ namespace SSunSoft.RPGUdemy
             entity?.ReceiveKnockback(knockback, duration);
             entityVfx?.PlayOnDamageVfx();
             ReduceHp(damage);
+
+            return true;
         }
+
+        private bool AttackEvaded() => Random.Range(0, 100) < stats.GetEvasion();
 
         protected void ReduceHp(float damage)
         {
@@ -62,7 +75,7 @@ namespace SSunSoft.RPGUdemy
         {
             if (healthBar == null)
                 return;
-            healthBar.value = currentHP / maxHP;
+            healthBar.value = currentHP / stats.GetMaxHealth();
         }
 
         private Vector2 CalculateKnockback(float damage, Transform damageDealer)
@@ -77,6 +90,6 @@ namespace SSunSoft.RPGUdemy
 
         private float CalculateDuration(float damage) => IsHeavyDamage(damage) ? heavyKnockbackDuration : knockbackDuration;
 
-        private bool IsHeavyDamage(float damage) => (damage / maxHP) > heavyDamageThreshold;
+        private bool IsHeavyDamage(float damage) => (damage / stats.GetMaxHealth()) > heavyDamageThreshold;
     }
 }

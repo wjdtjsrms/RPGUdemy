@@ -3173,6 +3173,7 @@ GameObject:
   - component: {fileID: 389329994}
   - component: {fileID: 389329995}
   - component: {fileID: 389329996}
+  - component: {fileID: 389329997}
   m_Layer: 8
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -3189,7 +3190,7 @@ Transform:
   m_GameObject: {fileID: 389329989}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.05, y: 0.32, z: 0.039788753}
+  m_LocalPosition: {x: -12.25, y: 0.32, z: 0.039788753}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -3331,7 +3332,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHP: 0
-  maxHP: 200
   isDead: 0
   knockbackPower: {x: 1.5, y: 2.5}
   heavyKnockbackPower: {x: 7, y: 7}
@@ -3355,6 +3355,53 @@ MonoBehaviour:
   hitVfxColor: {r: 0.6792453, g: 0.27233893, b: 0.33225846, a: 1}
   hitVfx: {fileID: 6709828291564335928, guid: e3092c30a9ae756419cd1dd33cb2948b, type: 3}
   attackAlert: {fileID: 569242523}
+--- !u!114 &389329997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389329989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce4e2be914eff6e4d97cef2700af1acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth:
+    baseValue: 100
+  major:
+    strength:
+      baseValue: 0
+    agillity:
+      baseValue: 0
+    intelligence:
+      baseValue: 0
+    vitality:
+      baseValue: 0
+  offense:
+    damage:
+      baseValue: 10
+    critPoser:
+      baseValue: 0
+    critChance:
+      baseValue: 0
+    fireDamage:
+      baseValue: 0
+    iceDamage:
+      baseValue: 0
+    lightningDamage:
+      baseValue: 0
+  defense:
+    armor:
+      baseValue: 0
+    evasion:
+      baseValue: 0
+    fireRes:
+      baseValue: 0
+    iceRes:
+      baseValue: 0
+    lightningRes:
+      baseValue: 0
 --- !u!1 &413392254
 GameObject:
   m_ObjectHideFlags: 0
@@ -3937,9 +3984,9 @@ Transform:
   m_GameObject: {fileID: 569242523}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.037, y: 0.888, z: -0.030606734}
-  m_LocalScale: {x: 0.63756347, y: 0.63756347, z: 0.63756347}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 1.296, z: 0}
+  m_LocalScale: {x: 0.22000001, y: 0.22000001, z: 0.22000001}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 389329990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4543,6 +4590,7 @@ GameObject:
   - component: {fileID: 909667801}
   - component: {fileID: 909667799}
   - component: {fileID: 909667800}
+  - component: {fileID: 909667802}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -4681,7 +4729,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHP: 0
-  maxHP: 100
   isDead: 0
   knockbackPower: {x: 1.5, y: 2.5}
   heavyKnockbackPower: {x: 7, y: 7}
@@ -4723,6 +4770,53 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   counterRecovery: 0.25
+--- !u!114 &909667802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909667793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce4e2be914eff6e4d97cef2700af1acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth:
+    baseValue: 100
+  major:
+    strength:
+      baseValue: 0
+    agillity:
+      baseValue: 0
+    intelligence:
+      baseValue: 0
+    vitality:
+      baseValue: 10
+  offense:
+    damage:
+      baseValue: 10
+    critPoser:
+      baseValue: 0
+    critChance:
+      baseValue: 0
+    fireDamage:
+      baseValue: 0
+    iceDamage:
+      baseValue: 0
+    lightningDamage:
+      baseValue: 0
+  defense:
+    armor:
+      baseValue: 0
+    evasion:
+      baseValue: 0
+    fireRes:
+      baseValue: 0
+    iceRes:
+      baseValue: 0
+    lightningRes:
+      baseValue: 0
 --- !u!1 &910884262
 GameObject:
   m_ObjectHideFlags: 0
@@ -4772,10 +4866,8 @@ MonoBehaviour:
   backgroundLayers:
   - background: {fileID: 1835528637}
     parallaxMultiplier: 1
-    imageWidthOffset: 10
   - background: {fileID: 1337316339}
     parallaxMultiplier: 0.7
-    imageWidthOffset: 10
 --- !u!1 &929152418
 GameObject:
   m_ObjectHideFlags: 0
@@ -5276,7 +5368,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182274435}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 0.0104, y: 0.012999999, z: 0.012999999}
   m_ConstrainProportionsScale: 0
   m_Children:
