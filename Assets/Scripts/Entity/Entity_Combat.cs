@@ -27,11 +27,12 @@ namespace SSunSoft.RPGUdemy
                 if (damgable == null)
                     continue;
 
-                var targetGotHit = damgable.TakeDamage(stats.GetPhysicalDamage(), damageDealer: transform);
+                var damage = stats.GetPhysicalDamage(out var isCrit);
+                var targetGotHit = damgable.TakeDamage(damage, damageDealer: transform);
 
                 if (targetGotHit)
                 {
-                    vfx.CreateOnHitVFX(target.transform);
+                    vfx.CreateOnHitVFX(target.transform, isCrit);
                 }
             }
         }

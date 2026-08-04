@@ -14,7 +14,7 @@ namespace SSunSoft.RPGUdemy
         private const float CRIT_CHANCE_PER_AGILITY = .3f;
         private const float CRIT_DAMAGE_PER_STRENGTH = .5f;
 
-        public float GetPhysicalDamage()
+        public float GetPhysicalDamage(out bool isCrit)
         {
             var baseDamage = offense.damage.GetValue();
             var bonusDamage = major.strength.GetValue();
@@ -28,7 +28,7 @@ namespace SSunSoft.RPGUdemy
             var bonusCritPower = major.strength.GetValue() * CRIT_DAMAGE_PER_STRENGTH;
             var critPower = (baseCritPower + bonusCritPower) / 100;
 
-            var isCrit = Random.Range(0, 100) < critChance;
+            isCrit = Random.Range(0, 100) < critChance;
             var finalDamage = isCrit ? totalBaseDamage * critPower : totalBaseDamage;
 
             return finalDamage;
@@ -36,10 +36,11 @@ namespace SSunSoft.RPGUdemy
 
         public float GetMaxHealth()
         {
-            var baseHp = maxHealth.GetValue();
+            var baseMaxHealth = maxHealth.GetValue();
             var bonusHp = major.vitality.GetValue() * HEALTH_PER_VITALITY;
 
-            return baseHp + bonusHp;
+            var finalMaxHealth = baseMaxHealth + bonusHp;
+            return finalMaxHealth;
         }
 
         public float GetEvasion()

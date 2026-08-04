@@ -10,6 +10,10 @@ namespace SSunSoft.RPGUdemy
         [SerializeField] private bool randomOffset = true;
         [SerializeField] private bool randomRotation = true;
 
+        [Header("Random Rotation")]
+        [SerializeField] private float minRotation = 0f;
+        [SerializeField] private float maxRotation = 360f;
+
         [Header("Random Position")]
         [SerializeField] private float xMinOffset = -.3f;
         [SerializeField] private float xMaxOffset = .3f;
@@ -42,7 +46,7 @@ namespace SSunSoft.RPGUdemy
             if (randomRotation == false)
                 return;
 
-            var zRotation = Random.Range(0, 360);
+            var zRotation = Random.Range(minRotation, maxRotation);
             transform.Rotate(0, 0, zRotation);
         }
     }
