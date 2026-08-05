@@ -34,13 +34,28 @@ namespace SSunSoft.RPGUdemy
             return finalDamage;
         }
 
-        public float GetMaxHealth()
+        public float GetArmorMitigation(float armorReduction)
         {
-            var baseMaxHealth = maxHealth.GetValue();
-            var bonusHp = major.vitality.GetValue() * HEALTH_PER_VITALITY;
+            var baseArmor = defense.armor.GetValue();
+            var bonusArmor = major.vitality.GetValue();
+            var totalArmor = baseArmor + bonusArmor;
 
-            var finalMaxHealth = baseMaxHealth + bonusHp;
-            return finalMaxHealth;
+            var reductionMultiplier = Mathf.Clamp(1 - armorReduction, 0, 1);
+            var effectiveArmor = totalArmor * reductionMultiplier;
+
+            var mitigation = totalArmor / (effectiveArmor + 100);
+            var mitigationGap = .85f;
+
+            float finalMitigation = Mathf.Clamp(mitigation, 0, mitigationGap);
+
+            return finalMitigation;
+        }
+
+        public float GetArmorReduction()
+        {
+            var finalReduction = offense.armorReduction.GetValue() / 100f;
+
+            return finalReduction;
         }
 
         public float GetEvasion()
@@ -54,6 +69,15 @@ namespace SSunSoft.RPGUdemy
             var finalEvasion = Mathf.Clamp(totalEvasion, 0, evasionCap);
 
             return finalEvasion;
+        }
+
+        public float GetMaxHealth()
+        {
+            var baseMaxHealth = maxHealth.GetValue();
+            var bonusHp = major.vitality.GetValue() * HEALTH_PER_VITALITY;
+
+            var finalMaxHealth = baseMaxHealth + bonusHp;
+            return finalMaxHealth;
         }
     }
 }

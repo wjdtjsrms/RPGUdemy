@@ -44,12 +44,18 @@ namespace SSunSoft.RPGUdemy
                 return false;
             }
 
-            var knockback = CalculateKnockback(damage, damageDealer);
-            var duration = CalculateDuration(damage);
+            var attackerStats = damageDealer.GetComponent<Entity_Stats>();
+            float armorReduction = attackerStats != null ? attackerStats.GetArmorReduction() : 0f;
+
+            var mitigation = stats.GetArmorMitigation(armorReduction);
+            var finalDamage = damage * (1 - mitigation);
+
+            var knockback = CalculateKnockback(finalDamage, damageDealer);
+            var duration = CalculateDuration(finalDamage);
 
             entity?.ReceiveKnockback(knockback, duration);
             entityVfx?.PlayOnDamageVfx();
-            ReduceHp(damage);
+            ReduceHp(finalDamage);
 
             return true;
         }
