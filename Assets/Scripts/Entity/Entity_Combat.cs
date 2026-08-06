@@ -22,13 +22,14 @@ namespace SSunSoft.RPGUdemy
         {
             foreach (var target in GetDetectionColliders())
             {
-                var damgable = target.GetComponent<IDamgable>();
+                var damegble = target.GetComponent<IDamgable>();
 
-                if (damgable == null)
+                if (damegble == null)
                     continue;
 
                 var damage = stats.GetPhysicalDamage(out var isCrit);
-                var targetGotHit = damgable.TakeDamage(damage, damageDealer: transform);
+                var elementalDamage = stats.GetElementalDamage(out var element);
+                var targetGotHit = damegble.TakeDamage(damage, elementalDamage, element, damageDealer: transform);
 
                 if (targetGotHit)
                 {

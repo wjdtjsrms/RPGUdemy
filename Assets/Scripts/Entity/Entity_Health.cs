@@ -34,7 +34,7 @@ namespace SSunSoft.RPGUdemy
             UpdateHealthBar();
         }
 
-        public virtual bool TakeDamage(float damage, Transform damageDealer)
+        public virtual bool TakeDamage(float damage, float elementalDamage, ElementType element, Transform damageDealer)
         {
             if (isDead) return false;
 
@@ -50,12 +50,14 @@ namespace SSunSoft.RPGUdemy
             var mitigation = stats.GetArmorMitigation(armorReduction);
             var finalDamage = damage * (1 - mitigation);
 
+            var resistance = stats.GetElementalResistance(element);
+            var elmentalDamageTaken = elementalDamage * (1 - resistance);
+
             var knockback = CalculateKnockback(finalDamage, damageDealer);
             var duration = CalculateDuration(finalDamage);
 
             entity?.ReceiveKnockback(knockback, duration);
-            entityVfx?.PlayOnDamageVfx();
-            ReduceHp(finalDamage);
+            ReduceHp(finalDamage + elmentalDamageTaken);
 
             return true;
         }
@@ -64,6 +66,7 @@ namespace SSunSoft.RPGUdemy
 
         protected void ReduceHp(float damage)
         {
+            entityVfx?.PlayOnDamageVfx();
             currentHP -= damage;
             UpdateHealthBar();
 

@@ -19,7 +19,7 @@ namespace SSunSoft
             fx = GetComponent<Entity_VFX>();
         }
 
-        public bool TakeDamage(float damage, Transform damageDealer)
+        public bool TakeDamage(float damage, float elementalDamage, ElementType element, Transform damageDealer)
         {
             fx.PlayOnDamageVfx();
             animator.SetBool("chestOpen", true);
