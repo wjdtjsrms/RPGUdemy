@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace SSunSoft.RPGUdemy
@@ -34,6 +35,25 @@ namespace SSunSoft.RPGUdemy
         [SerializeField] private Transform playerCheck;
         [SerializeField] public float playerCheckDistance = 10f;
         public Transform player { get; private set; }
+
+        protected override IEnumerator SlowDownEntityCo(float duration, float slowMultiplier)
+        {
+            var originalMovespeed = moveSpeed;
+            var originalBattleSpeed = battleMoveSpeed;
+            var originalAnimSpeed = anim.speed;
+
+            float speedMultiplier = 1 - slowMultiplier;
+
+            moveSpeed *= speedMultiplier;
+            battleMoveSpeed *= speedMultiplier;
+            anim.speed *= speedMultiplier;
+
+            yield return new WaitForSeconds(duration);
+
+            moveSpeed = originalMovespeed;
+            battleMoveSpeed = originalBattleSpeed;
+            anim.speed = originalAnimSpeed;
+        }
 
         public void EnableCounterWindow(bool enable) => canBeStunned = enable;
 

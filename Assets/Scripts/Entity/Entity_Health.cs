@@ -48,18 +48,23 @@ namespace SSunSoft.RPGUdemy
             float armorReduction = attackerStats != null ? attackerStats.GetArmorReduction() : 0f;
 
             var mitigation = stats.GetArmorMitigation(armorReduction);
-            var finalDamage = damage * (1 - mitigation);
+            var physicalDamageTaken = damage * (1 - mitigation);
 
             var resistance = stats.GetElementalResistance(element);
             var elmentalDamageTaken = elementalDamage * (1 - resistance);
 
+            TakeKnockBack(damageDealer, physicalDamageTaken);
+            ReduceHp(physicalDamageTaken + elmentalDamageTaken);
+
+            return true;
+        }
+
+        private void TakeKnockBack(Transform damageDealer, float finalDamage)
+        {
             var knockback = CalculateKnockback(finalDamage, damageDealer);
             var duration = CalculateDuration(finalDamage);
 
             entity?.ReceiveKnockback(knockback, duration);
-            ReduceHp(finalDamage + elmentalDamageTaken);
-
-            return true;
         }
 
         private bool AttackEvaded() => Random.Range(0, 100) < stats.GetEvasion();

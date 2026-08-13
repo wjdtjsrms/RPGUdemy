@@ -12,6 +12,11 @@ namespace SSunSoft.RPGUdemy
         [SerializeField] private float targetCheckRadius = 1f;
         [SerializeField] private LayerMask wahtIsTarget;
 
+        [Header("Status Effect Details")]
+        [SerializeField] private float defaultDuration = 3f;
+        [SerializeField] private float chillSlowMultiplier = .2f;
+
+
         private void Awake()
         {
             vfx = GetComponent<Entity_VFX>();
@@ -31,11 +36,26 @@ namespace SSunSoft.RPGUdemy
                 var elementalDamage = stats.GetElementalDamage(out var element);
                 var targetGotHit = damegble.TakeDamage(damage, elementalDamage, element, damageDealer: transform);
 
+                if (element != ElementType.None)
+                    ApplyStatusEffect(target.transform, element);
+
                 if (targetGotHit)
                 {
+                    // vfx.UpdateOnHitColor(element);
                     vfx.CreateOnHitVFX(target.transform, isCrit);
                 }
             }
+        }
+
+        public void ApplyStatusEffect(Transform target, ElementType element)
+        {
+            var statusHandler = target.GetComponent<Entity_StatusHandler>();
+
+            if (statusHandler == null)
+                return;
+
+            if (element == ElementType.Ice && statusHandler.CanBeApplied(ElementType.Ice))
+                statusHandler.ApplyChilledEffect(defaultDuration, chillSlowMultiplier);
         }
 
         protected Collider2D[] GetDetectionColliders()

@@ -19,11 +19,44 @@ namespace SSunSoft.RPGUdemy
         [SerializeField] private GameObject hitVfx;
         [SerializeField] private GameObject criHitVfx;
 
+        [Header("Element Colors")]
+        [SerializeField] private Color chillVfx = Color.cyan;
+        private Color originalHitVfxColor;
+
         private void Awake()
         {
             entity = GetComponent<Entity>();
             sr = GetComponentInChildren<SpriteRenderer>();
             originalMaterial = sr.material;
+            originalHitVfxColor = hitVfxColor;
+        }
+
+        public void PlayOnStatusVfx(float duration, ElementType element)
+        {
+            if (element == ElementType.Ice)
+                StartCoroutine(PlayStatusVfxCo(duration, chillVfx));
+        }
+
+        private IEnumerator PlayStatusVfxCo(float duration, Color effectColor)
+        {
+            var tickInterval = .25f;
+            var timeHasPassed = 0f;
+
+            var lightColor = effectColor * 1.2f;
+            var darkColor = effectColor * .9f;
+
+            bool toggle = false;
+
+            while (timeHasPassed < duration)
+            {
+                sr.color = toggle ? lightColor : darkColor;
+                toggle = !toggle;
+
+                yield return new WaitForSeconds(tickInterval);
+                timeHasPassed += tickInterval;
+            }
+
+            sr.color = Color.white;
         }
 
         public void CreateOnHitVFX(Transform target, bool isCrit)
@@ -36,6 +69,15 @@ namespace SSunSoft.RPGUdemy
 
             if (entity.facingDir == -1 && isCrit)
                 vfx.transform.Rotate(0, 180, 0);
+        }
+
+        public void UpdateOnHitColor(ElementType element)
+        {
+            if (element == ElementType.Ice)
+                hitVfxColor = chillVfx;
+
+            if (element == ElementType.None)
+                hitVfxColor = originalHitVfxColor;
         }
 
         public void PlayOnDamageVfx()

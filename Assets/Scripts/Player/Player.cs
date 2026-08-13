@@ -68,6 +68,39 @@ namespace SSunSoft.RPGUdemy
             stateMachine.Initialize(idleState);
         }
 
+        protected override IEnumerator SlowDownEntityCo(float duration, float slowMultiplier)
+        {
+            var originalMoveSpeed = moveSpeed;
+            var originalJumpForce = jumpForce;
+            var originalAnimSpeed = anim.speed;
+            var originalWallJump = wallJumpForce;
+            var originalJumpAttack = jumpAttackVelocity;
+            var originalAttackVelovity = new Vector2[attackVelocity.Length];
+            Array.Copy(attackVelocity, originalAttackVelovity, attackVelocity.Length);
+
+            var speedMultiplier = 1 - slowMultiplier;
+
+            moveSpeed *= speedMultiplier;
+            jumpForce *= speedMultiplier;
+            anim.speed *= speedMultiplier;
+            wallJumpForce *= speedMultiplier;
+            jumpAttackVelocity *= speedMultiplier;
+
+            for (int i = 0; i < attackVelocity.Length; i++)
+                attackVelocity[i] *= speedMultiplier;
+
+            yield return new WaitForSeconds(duration);
+
+            moveSpeed = originalMoveSpeed;
+            jumpForce = originalJumpForce;
+            anim.speed = originalAnimSpeed;
+            wallJumpForce = originalWallJump;
+            jumpAttackVelocity = originalJumpAttack;
+
+            for (int i = 0; i < attackVelocity.Length; i++)
+                attackVelocity[i] *= originalAttackVelovity[i];
+        }
+
         public override void EntityDeath()
         {
             base.EntityDeath();

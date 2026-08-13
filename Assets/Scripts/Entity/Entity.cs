@@ -28,6 +28,7 @@ namespace SSunSoft.RPGUdemy
 
         private bool isKnocked;
         private Coroutine knockbackCo;
+        private Coroutine slowDwonCo;
 
         protected virtual void Awake()
         {
@@ -57,6 +58,20 @@ namespace SSunSoft.RPGUdemy
         public virtual void EntityDeath()
         {
 
+        }
+
+        public virtual void SlowDownEntity(float duration, float slowMultiplier)
+        {
+            if (slowDwonCo != null)
+                StopCoroutine(slowDwonCo);
+
+            slowDwonCo = StartCoroutine(SlowDownEntityCo(duration, slowMultiplier));
+
+        }
+
+        protected virtual IEnumerator SlowDownEntityCo(float duration, float slowMultiplier)
+        {
+            yield return null;
         }
 
         public void ReceiveKnockback(Vector2 knockback, float duration)
