@@ -21,6 +21,7 @@ namespace SSunSoft.RPGUdemy
 
         [Header("Element Colors")]
         [SerializeField] private Color chillVfx = Color.cyan;
+        [SerializeField] private Color burnVfx = Color.red;
         private Color originalHitVfxColor;
 
         private void Awake()
@@ -35,6 +36,8 @@ namespace SSunSoft.RPGUdemy
         {
             if (element == ElementType.Ice)
                 StartCoroutine(PlayStatusVfxCo(duration, chillVfx));
+            else if (element == ElementType.Fire)
+                StartCoroutine(PlayStatusVfxCo(duration, burnVfx));
         }
 
         private IEnumerator PlayStatusVfxCo(float duration, Color effectColor)

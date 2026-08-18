@@ -16,7 +16,7 @@ namespace SSunSoft.RPGUdemy
         private const float CRIT_DAMAGE_PER_STRENGTH = .5f;
         private const float RESISTANCE_PER_INTELLIGENCE = .5f;
 
-        public float GetElementalDamage(out ElementType element)
+        public float GetElementalDamage(out ElementType element, float scaleFactor = 1f)
         {
             var fireDamage = offense.fireDamage.GetValue();
             var iceDamage = offense.iceDamage.GetValue();
@@ -51,7 +51,7 @@ namespace SSunSoft.RPGUdemy
             var weakerElementsDamage = bonusFire + bonusIce + bonusLightning;
             var finalDamage = highestDamage + bonusElementalDamage + weakerElementsDamage;
 
-            return finalDamage;
+            return finalDamage * scaleFactor;
         }
 
         public float GetElementalResistance(ElementType element)
@@ -81,7 +81,7 @@ namespace SSunSoft.RPGUdemy
             return finalResistance;
         }
 
-        public float GetPhysicalDamage(out bool isCrit)
+        public float GetPhysicalDamage(out bool isCrit, float scaleFactor = 1f)
         {
             var baseDamage = offense.damage.GetValue();
             var bonusDamage = major.strength.GetValue();
@@ -98,7 +98,7 @@ namespace SSunSoft.RPGUdemy
             isCrit = Random.Range(0, 100) < critChance;
             var finalDamage = isCrit ? totalBaseDamage * critPower : totalBaseDamage;
 
-            return finalDamage;
+            return finalDamage * scaleFactor;
         }
 
         public float GetArmorMitigation(float armorReduction)

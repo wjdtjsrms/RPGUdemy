@@ -32,8 +32,8 @@ namespace SSunSoft.RPGUdemy
                 if (damegble == null)
                     continue;
 
+                var elementalDamage = stats.GetElementalDamage(out var element, .6f);
                 var damage = stats.GetPhysicalDamage(out var isCrit);
-                var elementalDamage = stats.GetElementalDamage(out var element);
                 var targetGotHit = damegble.TakeDamage(damage, elementalDamage, element, damageDealer: transform);
 
                 if (element != ElementType.None)
@@ -47,7 +47,7 @@ namespace SSunSoft.RPGUdemy
             }
         }
 
-        public void ApplyStatusEffect(Transform target, ElementType element)
+        public void ApplyStatusEffect(Transform target, ElementType element, float scaleFactor = 1f)
         {
             var statusHandler = target.GetComponent<Entity_StatusHandler>();
 
@@ -56,6 +56,11 @@ namespace SSunSoft.RPGUdemy
 
             if (element == ElementType.Ice && statusHandler.CanBeApplied(ElementType.Ice))
                 statusHandler.ApplyChilledEffect(defaultDuration, chillSlowMultiplier);
+            else if (element == ElementType.Fire && statusHandler.CanBeApplied(ElementType.Fire))
+            {
+                var fireDamage = stats.offense.fireDamage.GetValue() * scaleFactor;
+                statusHandler.ApplyVBurnEffect(defaultDuration, fireDamage);
+            }
         }
 
         protected Collider2D[] GetDetectionColliders()
