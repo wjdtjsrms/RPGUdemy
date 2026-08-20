@@ -29,6 +29,7 @@ namespace SSunSoft.RPGUdemy
 
             comboAttackQueued = false;
             ResetComboIndexIfNeeded();
+            SyncAttackSpeed();
 
             attackDir = player.moveInput.x != 0 ? (int)player.moveInput.x : player.facingDir;
 

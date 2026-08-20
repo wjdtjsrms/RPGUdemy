@@ -1,18 +1,22 @@
 namespace SSunSoft.RPGUdemy
 {
+    using NUnit.Framework;
     using UnityEngine;
-    using UnityEngine.Rendering.Universal;
     using UnityEngine.UI;
 
     public class Entity_Health : MonoBehaviour, IDamgable
     {
         private Slider healthBar;
-        private Entity_VFX entityVfx;
         private Entity entity;
-        private Entity_Stats stats;
+        private Entity_VFX entityVfx;
+        private Entity_Stats entityStats;
 
-        [SerializeField] protected float currentHP;
+        [SerializeField] protected float currentHealth;
         [SerializeField] protected bool isDead;
+
+        [Header("Health regen")]
+        [SerializeField] private float regenInterval = 1f;
+        [SerializeField] private bool canRegenerateHealth = true;
 
         [Header("On Damage Knockback")]
         [SerializeField] private Vector2 knockbackPower = new Vector2(1.5f, 2.5f);
@@ -24,14 +28,16 @@ namespace SSunSoft.RPGUdemy
 
         private void Awake()
         {
-            entityVfx = GetComponent<Entity_VFX>();
             entity = GetComponent<Entity>();
-            stats = GetComponent<Entity_Stats>();
+            entityVfx = GetComponent<Entity_VFX>();
+            entityStats = GetComponent<Entity_Stats>();
 
             healthBar = GetComponentInChildren<Slider>();
 
-            currentHP = stats.GetMaxHealth();
+            currentHealth = entityStats.GetMaxHealth();
             UpdateHealthBar();
+
+            InvokeRepeating(nameof(RegenerateHealth), 0, regenInterval);
         }
 
         public virtual bool TakeDamage(float damage, float elementalDamage, ElementType element, Transform damageDealer)
@@ -47,35 +53,48 @@ namespace SSunSoft.RPGUdemy
             var attackerStats = damageDealer.GetComponent<Entity_Stats>();
             float armorReduction = attackerStats != null ? attackerStats.GetArmorReduction() : 0f;
 
-            var mitigation = stats.GetArmorMitigation(armorReduction);
+            var mitigation = entityStats.GetArmorMitigation(armorReduction);
             var physicalDamageTaken = damage * (1 - mitigation);
 
-            var resistance = stats.GetElementalResistance(element);
+            var resistance = entityStats.GetElementalResistance(element);
             var elmentalDamageTaken = elementalDamage * (1 - resistance);
 
             TakeKnockBack(damageDealer, physicalDamageTaken);
-            ReduceHp(physicalDamageTaken + elmentalDamageTaken);
+            ReduceHealth(physicalDamageTaken + elmentalDamageTaken);
 
             return true;
         }
 
-        private void TakeKnockBack(Transform damageDealer, float finalDamage)
-        {
-            var knockback = CalculateKnockback(finalDamage, damageDealer);
-            var duration = CalculateDuration(finalDamage);
+        private bool AttackEvaded() => Random.Range(0, 100) < entityStats.GetEvasion();
 
-            entity?.ReceiveKnockback(knockback, duration);
+        private void RegenerateHealth()
+        {
+            if (canRegenerateHealth == false)
+                return;
+
+            var regenAmount = entityStats.resource.healthRegen.GetValue();
+            IncreaseHealth(regenAmount);
         }
 
-        private bool AttackEvaded() => Random.Range(0, 100) < stats.GetEvasion();
+        public void IncreaseHealth(float healAmount)
+        {
+            if (isDead)
+                return;
 
-        public void ReduceHp(float damage)
+            var newHealth = currentHealth + healAmount;
+            var maxHealth = entityStats.GetMaxHealth();
+
+            currentHealth = Mathf.Min(newHealth, maxHealth);
+            UpdateHealthBar();
+        }
+
+        public void ReduceHealth(float damage)
         {
             entityVfx?.PlayOnDamageVfx();
-            currentHP -= damage;
+            currentHealth -= damage;
             UpdateHealthBar();
 
-            if (currentHP <= 0)
+            if (currentHealth <= 0)
                 Die();
         }
 
@@ -89,7 +108,15 @@ namespace SSunSoft.RPGUdemy
         {
             if (healthBar == null)
                 return;
-            healthBar.value = currentHP / stats.GetMaxHealth();
+            healthBar.value = currentHealth / entityStats.GetMaxHealth();
+        }
+
+        private void TakeKnockBack(Transform damageDealer, float finalDamage)
+        {
+            var knockback = CalculateKnockback(finalDamage, damageDealer);
+            var duration = CalculateDuration(finalDamage);
+
+            entity?.ReceiveKnockback(knockback, duration);
         }
 
         private Vector2 CalculateKnockback(float damage, Transform damageDealer)
@@ -104,6 +131,6 @@ namespace SSunSoft.RPGUdemy
 
         private float CalculateDuration(float damage) => IsHeavyDamage(damage) ? heavyKnockbackDuration : knockbackDuration;
 
-        private bool IsHeavyDamage(float damage) => (damage / stats.GetMaxHealth()) > heavyDamageThreshold;
+        private bool IsHeavyDamage(float damage) => (damage / entityStats.GetMaxHealth()) > heavyDamageThreshold;
     }
 }

@@ -15,6 +15,10 @@ namespace SSunSoft.RPGUdemy
         [Header("Status Effect Details")]
         [SerializeField] private float defaultDuration = 3f;
         [SerializeField] private float chillSlowMultiplier = .2f;
+        [SerializeField] private float electrifyChargeBuildUp = .4f;
+        [Space]
+        [SerializeField] private float fireScale = .8f;
+        [SerializeField] private float lightningScale = 2.5f;
 
 
         private void Awake()
@@ -55,11 +59,18 @@ namespace SSunSoft.RPGUdemy
                 return;
 
             if (element == ElementType.Ice && statusHandler.CanBeApplied(ElementType.Ice))
-                statusHandler.ApplyChilledEffect(defaultDuration, chillSlowMultiplier);
+                statusHandler.ApplyChillEffect(defaultDuration, chillSlowMultiplier);
             else if (element == ElementType.Fire && statusHandler.CanBeApplied(ElementType.Fire))
             {
+                scaleFactor = fireScale;
                 var fireDamage = stats.offense.fireDamage.GetValue() * scaleFactor;
                 statusHandler.ApplyVBurnEffect(defaultDuration, fireDamage);
+            }
+            else if (element == ElementType.Lightning && statusHandler.CanBeApplied(ElementType.Lightning))
+            {
+                scaleFactor = lightningScale;
+                var lightningDamage = stats.offense.lightningDamage.GetValue() * scaleFactor;
+                statusHandler.ApplyElectrifyEffect(defaultDuration, lightningDamage, electrifyChargeBuildUp);
             }
         }
 

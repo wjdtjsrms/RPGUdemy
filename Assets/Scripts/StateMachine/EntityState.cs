@@ -9,6 +9,7 @@ namespace SSunSoft.RPGUdemy
 
         protected Animator anim;
         protected Rigidbody2D rb;
+        protected Entity_Stats stats;
 
         protected float stateTimer;
         protected bool triggerCalled;
@@ -44,6 +45,12 @@ namespace SSunSoft.RPGUdemy
         public virtual void UpdateAnimationParameters()
         {
 
+        }
+
+        public void SyncAttackSpeed()
+        {
+            var attackSpeed = stats.offense.attackSpeed.GetValue();
+            anim.SetFloat("attackSpeedMultiplier", attackSpeed);
         }
     }
 }

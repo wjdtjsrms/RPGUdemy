@@ -12,6 +12,7 @@ namespace SSunSoft.RPGUdemy
 
             rb = enemy.rb;
             anim = enemy.anim;
+            stats = enemy.stats;
         }
 
         public override void UpdateAnimationParameters()

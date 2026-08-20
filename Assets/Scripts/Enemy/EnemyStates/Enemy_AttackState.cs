@@ -8,6 +8,12 @@ namespace SSunSoft.RPGUdemy
         {
         }
 
+        public override void Enter()
+        {
+            base.Enter();
+            SyncAttackSpeed();
+        }
+
         public override void Update()
         {
             base.Update();

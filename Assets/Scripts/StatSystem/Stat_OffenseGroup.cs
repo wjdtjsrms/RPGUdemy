@@ -5,6 +5,8 @@ namespace SSunSoft.RPGUdemy
     [Serializable]
     public class Stat_OffenseGroup
     {
+        public Stat attackSpeed;
+
         // Physical Damage
         public Stat damage;
         public Stat critPower;

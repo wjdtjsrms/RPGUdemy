@@ -5,7 +5,7 @@ namespace SSunSoft.RPGUdemy
     public class Entity_Stats : MonoBehaviour
     {
         public ElementType element;
-        public Stat maxHealth;
+        public Stat_ResourceGroup resource;
         public Stat_MajorGroup major;
         public Stat_OffenseGroup offense;
         public Stat_DefenseGroup defense;
@@ -140,7 +140,7 @@ namespace SSunSoft.RPGUdemy
 
         public float GetMaxHealth()
         {
-            var baseMaxHealth = maxHealth.GetValue();
+            var baseMaxHealth = resource.maxHealth.GetValue();
             var bonusHp = major.vitality.GetValue() * HEALTH_PER_VITALITY;
 
             var finalMaxHealth = baseMaxHealth + bonusHp;
