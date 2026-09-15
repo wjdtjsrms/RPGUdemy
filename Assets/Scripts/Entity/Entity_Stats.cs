@@ -4,11 +4,12 @@ namespace SSunSoft.RPGUdemy
 
     public class Entity_Stats : MonoBehaviour
     {
-        public ElementType element;
+        public Stat_SetupSO defaultStatSetup;
+
         public Stat_ResourceGroup resource;
-        public Stat_MajorGroup major;
         public Stat_OffenseGroup offense;
         public Stat_DefenseGroup defense;
+        public Stat_MajorGroup major;
 
         private const float HEALTH_PER_VITALITY = 5f;
         private const float VASION_PER_EVASION = .5f;
@@ -145,6 +146,68 @@ namespace SSunSoft.RPGUdemy
 
             var finalMaxHealth = baseMaxHealth + bonusHp;
             return finalMaxHealth;
+        }
+
+        public Stat GetStatByType(StatType statType)
+        {
+            return statType switch
+            {
+                StatType.MaxHelath => resource.maxHealth,
+                StatType.HealthRegen => resource.healthRegen,
+                StatType.Strength => major.strength,
+                StatType.Agillity => major.agility,
+                StatType.Intelligence => major.intelligence,
+                StatType.Vitality => major.vitality,
+                StatType.AttackSpeed => offense.attackSpeed,
+                StatType.Damage => offense.damage,
+                StatType.CritChance => offense.critChance,
+                StatType.CritPoser => offense.critPower,
+                StatType.ArmorReduction => offense.armorReduction,
+                StatType.FireDamage => offense.fireDamage,
+                StatType.IceDamage => offense.iceDamage,
+                StatType.LightningDamage => offense.lightningDamage,
+                StatType.Armor => defense.armor,
+                StatType.Evasion => defense.evasion,
+                StatType.IceResistance => defense.iceRes,
+                StatType.FireResistance => defense.fireRes,
+                StatType.LightningResistance => defense.lightningRes,
+                _ => null
+            };
+        }
+
+        [ContextMenu("Update Default Stat Setup")]
+        public void ApplyDefaultStatSetup()
+        {
+            if (defaultStatSetup == null)
+            {
+                Debug.LogError("Default Stat Setup is not assigned in the inspector.");
+                return;
+            }
+
+            resource.maxHealth.SetBaseValue(defaultStatSetup.maxHealth);
+            resource.healthRegen.SetBaseValue(defaultStatSetup.healthRegen);
+
+            major.strength.SetBaseValue(defaultStatSetup.strength);
+            major.agility.SetBaseValue(defaultStatSetup.agility);
+            major.intelligence.SetBaseValue(defaultStatSetup.intelligence);
+            major.vitality.SetBaseValue(defaultStatSetup.vitality);
+
+            offense.attackSpeed.SetBaseValue(defaultStatSetup.attackSpeed);
+            offense.damage.SetBaseValue(defaultStatSetup.damage);
+            offense.critChance.SetBaseValue(defaultStatSetup.critChance);
+            offense.critPower.SetBaseValue(defaultStatSetup.critPower);
+            offense.armorReduction.SetBaseValue(defaultStatSetup.armorReduction);
+
+            offense.fireDamage.SetBaseValue(defaultStatSetup.fireDamage);
+            offense.iceDamage.SetBaseValue(defaultStatSetup.iceDamage);
+            offense.lightningDamage.SetBaseValue(defaultStatSetup.lightningDamage);
+
+            defense.armor.SetBaseValue(defaultStatSetup.armor);
+            defense.evasion.SetBaseValue(defaultStatSetup.evasion);
+
+            defense.fireRes.SetBaseValue(defaultStatSetup.fireRes);
+            defense.iceRes.SetBaseValue(defaultStatSetup.iceRes);
+            defense.lightningRes.SetBaseValue(defaultStatSetup.lightningRes);
         }
     }
 }
