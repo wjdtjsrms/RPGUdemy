@@ -45,9 +45,9 @@ namespace SSunSoft.RPGUdemy
                 return 0;
             }
 
-            var bonusFire = (fireDamage == highestDamage) ? 0 : fireDamage * .5f;
-            var bonusIce = (iceDamage == highestDamage) ? 0 : iceDamage * .5f;
-            var bonusLightning = (lightningDamage == highestDamage) ? 0 : lightningDamage * .5f;
+            var bonusFire = (element == ElementType.Fire) ? 0 : fireDamage * .5f;
+            var bonusIce = (element == ElementType.Ice) ? 0 : iceDamage * .5f;
+            var bonusLightning = (element == ElementType.Lightning) ? 0 : lightningDamage * .5f;
 
             var weakerElementsDamage = bonusFire + bonusIce + bonusLightning;
             var finalDamage = highestDamage + bonusElementalDamage + weakerElementsDamage;
