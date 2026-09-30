@@ -6,12 +6,26 @@ namespace SSunSoft.RPGUdemy
 
     public class UI_TreeNode : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
     {
+        [SerializeField] private Skill_DataSO skillData;
+        [SerializeField] private string skillName;
+
         [SerializeField] private Image skillIcon;
         [SerializeField] private string lockedColorHex = "#9F9F9F";
         private Color lastColor;
 
         public bool isUnlocked;
         public bool isLocked;
+
+        private void OnValidate()
+        {
+            if (skillData == null)
+                return;
+
+            skillName = skillData.displayName;
+            skillIcon.sprite = skillData.icon;
+            gameObject.name = $"UI_TreeNode - {skillData.displayName}";
+
+        }
 
         private void Awake()
         {
