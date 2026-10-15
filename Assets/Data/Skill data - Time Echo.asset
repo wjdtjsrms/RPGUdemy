@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff5a34fa706062e43a88b5a746ee2298, type: 3}
-  m_Name: Skill data - Time Echo
+  m_Name: Skill data - Time echo
   m_EditorClassIdentifier: 
-  cost: 1
-  displayName: Time Echo
+  cost: 2
+  displayName: Time echo
   description: 'Create a time echo of yourself.
 
     The echo distracts emenies.'

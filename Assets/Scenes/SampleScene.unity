@@ -4706,7 +4706,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935651730}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4714,11 +4714,11 @@ RectTransform:
   - {fileID: 512872449}
   - {fileID: 1022422244}
   - {fileID: 1791518359}
-  m_Father: {fileID: 1599840730}
+  m_Father: {fileID: 1058749346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -35.5}
+  m_AnchoredPosition: {x: -713.8595, y: 3.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &935651732
@@ -4748,12 +4748,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c465fd174b1c4c76ba51b6876a4d795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  neededNodes:
+  - {fileID: 1811349287}
+  conflictNodes:
+  - {fileID: 1594501430}
+  isUnlocked: 0
+  isLocked: 0
   skillData: {fileID: 11400000, guid: c2ca4d9f5f24a304994e5a33e1a56d93, type: 2}
   skillName: Healing wisp
   skillIcon: {fileID: 1791518360}
   lockedColorHex: '#9F9F9F'
-  isUnlocked: 0
-  isLocked: 0
 --- !u!1 &1005078542
 GameObject:
   m_ObjectHideFlags: 0
@@ -5168,6 +5172,59 @@ MonoBehaviour:
   rotationPoint: {fileID: 1042059640}
   connectionLength: {fileID: 1687785032}
   childNodeConnectionPoint: {fileID: 355803403}
+--- !u!1 &1058749345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1058749346}
+  - component: {fileID: 1058749347}
+  m_Layer: 5
+  m_Name: UI_SkillTree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1058749346
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058749345}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1811349286}
+  - {fileID: 935651731}
+  - {fileID: 1594501428}
+  - {fileID: 1100583904}
+  m_Father: {fileID: 1599840730}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 713.8595, y: -39}
+  m_SizeDelta: {x: 1852.281, y: 520}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1058749347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058749345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53a1269123150614780a5c4926c0210a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillPoints: 10
 --- !u!1 &1076345153
 GameObject:
   m_ObjectHideFlags: 0
@@ -5267,7 +5324,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1100583903}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5277,11 +5334,11 @@ RectTransform:
   - {fileID: 1882090588}
   - {fileID: 26953126}
   - {fileID: 99180620}
-  m_Father: {fileID: 1599840730}
+  m_Father: {fileID: 1058749346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1430, y: -39}
+  m_AnchoredPosition: {x: 716.1406, y: 0}
   m_SizeDelta: {x: 420, y: 520}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1100583905
@@ -5300,6 +5357,11 @@ MonoBehaviour:
   skillName: {fileID: 1882090589}
   skillDescription: {fileID: 26953127}
   skillRequirements: {fileID: 99180621}
+  metConditionHex: '#CFBE2C'
+  notMetConditionHex: '#FF455D'
+  importantInfoHex: '#9BB3E3'
+  exampleColor: {r: 0.67556286, g: 0.7075472, b: 0.44388574, a: 0}
+  lockedSkillText: You've taken a diffrent path - this skill is now locked.
 --- !u!1 &1182274435
 GameObject:
   m_ObjectHideFlags: 0
@@ -6148,7 +6210,7 @@ GameObject:
   - component: {fileID: 1594501430}
   - component: {fileID: 1594501429}
   m_Layer: 5
-  m_Name: UI_TreeNode - Healing wisp
+  m_Name: UI_TreeNode - Timeless attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6161,7 +6223,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594501427}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6169,11 +6231,11 @@ RectTransform:
   - {fileID: 469251312}
   - {fileID: 1245709999}
   - {fileID: 1932980236}
-  m_Father: {fileID: 1599840730}
+  m_Father: {fileID: 1058749346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -161.57397, y: -34.573914}
+  m_AnchoredPosition: {x: -876.1405, y: 3.7189941}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1594501429
@@ -6203,12 +6265,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c465fd174b1c4c76ba51b6876a4d795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillData: {fileID: 11400000, guid: c2ca4d9f5f24a304994e5a33e1a56d93, type: 2}
-  skillName: Healing wisp
-  skillIcon: {fileID: 1932980237}
-  lockedColorHex: '#9F9F9F'
+  neededNodes:
+  - {fileID: 1811349287}
+  conflictNodes:
+  - {fileID: 935651733}
   isUnlocked: 0
   isLocked: 0
+  skillData: {fileID: 11400000, guid: 657b7173b6cedde4bb48bec275d9a3bd, type: 2}
+  skillName: Timeless attack
+  skillIcon: {fileID: 1932980237}
+  lockedColorHex: '#9F9F9F'
 --- !u!1 &1599840726
 GameObject:
   m_ObjectHideFlags: 0
@@ -6304,10 +6370,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1811349286}
-  - {fileID: 935651731}
-  - {fileID: 1594501428}
-  - {fileID: 1100583904}
+  - {fileID: 1058749346}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -6673,7 +6736,7 @@ GameObject:
   - component: {fileID: 1811349287}
   - component: {fileID: 1811349288}
   m_Layer: 5
-  m_Name: UI_TreeNode - Time Echo
+  m_Name: UI_TreeNode - Time echo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6686,7 +6749,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811349285}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6695,11 +6758,11 @@ RectTransform:
   - {fileID: 1042059640}
   - {fileID: 1197901020}
   - {fileID: 1765792345}
-  m_Father: {fileID: 1599840730}
+  m_Father: {fileID: 1058749346}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 127}
+  m_AnchoredPosition: {x: -713.8595, y: 166}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1811349287
@@ -6714,12 +6777,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c465fd174b1c4c76ba51b6876a4d795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillData: {fileID: 11400000, guid: e6513331550330249a49174e035bb09d, type: 2}
-  skillName: Time Echo
-  skillIcon: {fileID: 1765792346}
-  lockedColorHex: '#9F9F9F'
+  neededNodes: []
+  conflictNodes: []
   isUnlocked: 0
   isLocked: 0
+  skillData: {fileID: 11400000, guid: e6513331550330249a49174e035bb09d, type: 2}
+  skillName: Time echo
+  skillIcon: {fileID: 1765792346}
+  lockedColorHex: '#9F9F9F'
 --- !u!114 &1811349288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7131,7 +7196,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 859213284, guid: a2ce55126eff95d44be75ee45a1bb141, type: 3}
+  m_Sprite: {fileID: 526541458, guid: a2ce55126eff95d44be75ee45a1bb141, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
