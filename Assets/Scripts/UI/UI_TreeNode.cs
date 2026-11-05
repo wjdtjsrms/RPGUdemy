@@ -9,6 +9,7 @@ namespace SSunSoft.RPGUdemy
         private UI ui;
         private RectTransform rect;
         private UI_SkillTree skillTree;
+        private UI_TreeConnectHandler connectHandler;
 
         [Header("Unlock details")]
         public UI_TreeNode[] neededNodes;
@@ -28,16 +29,29 @@ namespace SSunSoft.RPGUdemy
             ui = GetComponentInParent<UI>();
             rect = GetComponent<RectTransform>();
             skillTree = GetComponentInParent<UI_SkillTree>();
+            connectHandler = GetComponent<UI_TreeConnectHandler>();
 
             UpdateIconColor(GetColorByHex(lockedColorHex));
+        }
+
+        public void Refund()
+        {
+            isUnlocked = false;
+            isLocked = false;
+            UpdateIconColor(GetColorByHex(lockedColorHex));
+
+            skillTree.AddSkillPoints(skillData.cost);
+            connectHandler.UnlockConnectionImage(false);
         }
 
         private void Unlock()
         {
             isUnlocked = true;
             UpdateIconColor(Color.white);
-            skillTree.RemoveSkillPoints(skillData.cost);
             LockConflictNodes();
+
+            skillTree.RemoveSkillPoints(skillData.cost);
+            connectHandler.UnlockConnectionImage(true);
         }
 
         private bool CanBeUnlocked()
@@ -82,24 +96,30 @@ namespace SSunSoft.RPGUdemy
         {
             if (CanBeUnlocked())
                 Unlock();
-            else
-                Debug.Log("Cannot Be Unlocked");
+            else if (isLocked)
+                ui.skillToolTip.LockedSkilEffect();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             ui.skillToolTip.ShowToolTip(true, rect, this);
 
-            if (!isUnlocked)
-                UpdateIconColor(Color.white * .9f);
+            if (isUnlocked || isLocked)
+                return;
+
+            Color color = Color.white * .9f;
+            color.a = 1;
+            UpdateIconColor(color);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             ui.skillToolTip.ShowToolTip(false, rect);
 
-            if (!isUnlocked)
-                UpdateIconColor(lastColor);
+            if (isUnlocked || isLocked)
+                return;
+
+            UpdateIconColor(lastColor);
         }
 
         private Color GetColorByHex(string hexNumber)
