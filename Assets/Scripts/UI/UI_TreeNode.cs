@@ -1,5 +1,6 @@
 namespace SSunSoft.RPGUdemy
 {
+    using System;
     using UnityEngine;
     using UnityEngine.EventSystems;
     using UnityEngine.UI;
@@ -104,28 +105,41 @@ namespace SSunSoft.RPGUdemy
         {
             ui.skillToolTip.ShowToolTip(true, rect, this);
 
-            if (isUnlocked || isLocked)
-                return;
-
-            Color color = Color.white * .9f;
-            color.a = 1;
-            UpdateIconColor(color);
+            if (!isUnlocked || !isLocked)
+                ToggleNodeHighlight(true);
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             ui.skillToolTip.ShowToolTip(false, rect);
 
-            if (isUnlocked || isLocked)
-                return;
+            if (!isUnlocked || !isLocked)
+                ToggleNodeHighlight(false);
+        }
 
-            UpdateIconColor(lastColor);
+        private void ToggleNodeHighlight(bool highlight)
+        {
+            Color highlightColor = Color.white * .9f;
+            highlightColor.a = 1;
+
+            Color colorToApply = highlight ? highlightColor : lastColor;
+
+            UpdateIconColor(colorToApply);
         }
 
         private Color GetColorByHex(string hexNumber)
         {
             ColorUtility.TryParseHtmlString(hexNumber, out var color);
             return color;
+        }
+
+        private void OnDisable()
+        {
+            if (isLocked)
+                UpdateIconColor(GetColorByHex(lockedColorHex));
+
+            if (isUnlocked)
+                UpdateIconColor(Color.white);
         }
 
         private void OnValidate()

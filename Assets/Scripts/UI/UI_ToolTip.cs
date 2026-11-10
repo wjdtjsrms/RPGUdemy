@@ -46,5 +46,11 @@ namespace SSunSoft.RPGUdemy
 
             rect.position = targetPosition;
         }
+
+
+        protected string GetColoredText(string color, string text)
+        {
+            return $"<color={color}>{text}</color>";
+        }
     }
 }
